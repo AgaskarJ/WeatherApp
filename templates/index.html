@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+</head>
+<body>
+    <div style="margin-top: 50px;" class="ui container">
+    <h1 style="color: orange">Weather App</h1>
+
+    <form class="ui form" action="/" method="post" style="text-align: center;"> 
+        <div class="field">
+            <h3>Search City: </h3>
+            <input type="text" name="city" placeholder="" style="width: 250px">
+            <button class="ui blue button" type="submit" value="submit">Go</button>
+        </div>
+    </form>
+
+    <h2 style="text-align: center;"><u>{{ weather_info['City'] }} </u></h2>  
+    
+    <p style="text-align: center;"> Latitude Coordinate: {{ weather_info['Latitude'] }}</p>
+    <p style="text-align: center;"> Longitude Coodinate: {{ weather_info['Longitude'] }}</p>
+
+    <div style="text-align: center">
+    <button class="ui green basic button">
+        <i class="map marker alternate icon"></i>
+        <a href={{ map_url }}>View in Map</a>
+      </button>
+    </div>
+    <br>
+
+    <table class="table" style="margin-left: auto; margin-right: auto;">
+        <thead>
+          <tr>
+            <th><b>Current</b></th>
+            <th><img src="{{ icon_url }}" alt="current"> </th>
+            <th>Historical</th>
+            <th><img src="{{ hist_icon_url }}" alt="historical"></th>
+          </tr>
+        </thead>
+        <tbody>
+    
+        <tr class="center aligned">
+            <td> Temperature: {{ weather_info['Temperature'] }}F </td><td></td>
+            <td> Temperature: {{ historical_info['Temperature'] }}F </td><td></td>
+        </tr>
+        <tr class="center aligned">
+            <td> Feels like: {{ weather_info['Feels Like'] }}F </td><td></td>
+            <td> Feels like: {{ historical_info['Feels Like'] }}F </td><td></td>
+        </tr>
+        <tr class="center aligned">
+            <td> Main weather group: {{ weather_info['Main Weather'] }} </td><td></td>
+            <td> Main weather group: {{ historical_info['Main Weather'] }} </td><td></td>
+        </tr>
+        <tr class="center aligned">
+            <td> Description: {{ weather_info['Description'] }} </td><td></td>
+            <td> Description: {{ historical_info['Description'] }} </td><td></td>
+        </tr>
+    
+        </tbody>
+      </table>
+
+      <p></p>
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type=text/javascript>
+         $(function() {
+            $('a#download').on('click', function(e) {
+            e.preventDefault()
+            alert("Downloaded Excel");
+            $.getJSON('/download_excel',
+                function(data) {
+                    
+            });
+            return false;
+          });
+        });
+        </script>
+
+    <form>
+    <a href=# id=download><button class="ui basic button"><i class="download icon"></i>Download Excel</button></a>
+    </form>
+
+      <p></p>
+      <div class="ui centered raised fluid card">
+        <div class="content">
+          <div class="header">Current JSON</div>
+          <div class="description">
+            {{ response }}
+          </div>
+        </div>
+      </div>
+      <div class="ui centered raised fluid card">
+        <div class="content">
+          <div class="header">Historical JSON</div>
+          <div class="description">
+            {{ hist_response }}
+          </div>
+        </div>
+      </div>
+
+    </div>
+    
+</body>
+</html>
