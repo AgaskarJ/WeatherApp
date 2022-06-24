@@ -9,7 +9,7 @@
     <title>Weather App</title>
 </head>
 <body>
-    <div style="margin-top: 50px;" class="ui container">
+    <div style="margin-top: 50px; margin-bottom: 50px;" class="ui container">
     <h1 style="color: orange">Weather App</h1>
 
     <form class="ui form" action="/" method="post" style="text-align: center;"> 
@@ -20,45 +20,84 @@
         </div>
     </form>
 
-    <h2 style="text-align: center;"><u>{{ weather_info['City'] }} </u></h2>  
-    
-    <p style="text-align: center;"> Latitude Coordinate: {{ weather_info['Latitude'] }}</p>
-    <p style="text-align: center;"> Longitude Coodinate: {{ weather_info['Longitude'] }}</p>
+    <h2 style="text-align: center;"><u>{{ weather_info['City'] }}</u></h2>  
 
-    <div style="text-align: center">
-    <button class="ui green basic button">
-        <i class="map marker alternate icon"></i>
-        <a href={{ map_url }}>View in Map</a>
-      </button>
+    <div class="ui segment" style="width: 60%; margin: auto;">
+      <div class="ui two column very relaxed grid">
+        <div class="column">
+          <h3 style="text-align: center;">Current Weather <img src="{{ icon_url }}" alt="current"></h3>
+          <p style="text-align: center;">Temperature: {{ weather_info['Temperature'] }}F</p>
+          <p style="text-align: center;">Feels like: {{ weather_info['Feels Like'] }}F</p>
+          <p style="text-align: center;">Main weather group: {{ weather_info['Main Weather'] }}</p>
+          <p style="text-align: center;">Description: {{ weather_info['Description'] }}</p>
+          <p></p>
+        </div>
+        <div class="column">
+          <br>
+          <p style="text-align: center;"> Latitude Coordinate: {{ weather_info['Latitude'] }}</p>
+          <p style="text-align: center;"> Longitude Coodinate: {{ weather_info['Longitude'] }}</p>
+          <br>
+          <div style="text-align: center">
+            <button class="ui green basic button">
+                <i class="map marker alternate icon"></i>
+                <a href={{ map_url }}>View in Map</a>
+              </button>
+            </div>
+        </div>
+      </div>
+      <div class="ui vertical divider"> 
+        <img src="https://flagcdn.com/20x15/{{ flag }}.png" srcset="https://flagcdn.com/40x30/{{ flag }}.png 2x,
+        https://flagcdn.com/60x45/{{ flag }}.png 3x"
+        width="20"
+        height="15">
+      </div>
     </div>
     <br>
-
+    
     <table class="table" style="margin-left: auto; margin-right: auto;">
         <thead>
           <tr>
-            <th><b>Current</b></th>
-            <th><img src="{{ icon_url }}" alt="current"> </th>
-            <th>Historical</th>
-            <th><img src="{{ hist_icon_url }}" alt="historical"></th>
+            <th>{{ historical_info['Date1'] }}   Weather</th>
+            <th><img src="{{ historical_info['Icon1'] }}" alt="historical"></th>
+            <th>{{ historical_info['Date2'] }}   Weather</th>
+            <th><img src="{{ historical_info['Icon2'] }}" alt="historical"></th>
+            <th> {{ historical_info['Date3'] }}   Weather</th>
+            <th><img src="{{ historical_info['Icon3'] }}" alt="historical"></th>
+            <th>{{ historical_info['Date4'] }}   Weather</th>
+            <th><img src="{{ historical_info['Icon4'] }}" alt="historical"></th>
+            <th>{{ historical_info['Date5'] }}   Weather</th>
+            <th><img src="{{ historical_info['Icon5'] }}" alt="historical"></th>
           </tr>
         </thead>
         <tbody>
     
         <tr class="center aligned">
-            <td> Temperature: {{ weather_info['Temperature'] }}F </td><td></td>
-            <td> Temperature: {{ historical_info['Temperature'] }}F </td><td></td>
+            <td> Temperature: {{ historical_info['Temperature1'] }}F </td><td></td>
+            <td> Temperature: {{ historical_info['Temperature2'] }}F </td><td></td>
+            <td> Temperature: {{ historical_info['Temperature3'] }}F </td><td></td>
+            <td> Temperature: {{ historical_info['Temperature4'] }}F </td><td></td>
+            <td> Temperature: {{ historical_info['Temperature5'] }}F </td><td></td>
         </tr>
         <tr class="center aligned">
-            <td> Feels like: {{ weather_info['Feels Like'] }}F </td><td></td>
-            <td> Feels like: {{ historical_info['Feels Like'] }}F </td><td></td>
+            <td> Feels like: {{ historical_info['Feels Like1'] }}F </td><td></td>
+            <td> Feels like: {{ historical_info['Feels Like2'] }}F </td><td></td>
+            <td> Feels like: {{ historical_info['Feels Like3'] }}F </td><td></td>
+            <td> Feels like: {{ historical_info['Feels Like4'] }}F </td><td></td>
+            <td> Feels like: {{ historical_info['Feels Like5'] }}F </td><td></td>
         </tr>
         <tr class="center aligned">
-            <td> Main weather group: {{ weather_info['Main Weather'] }} </td><td></td>
-            <td> Main weather group: {{ historical_info['Main Weather'] }} </td><td></td>
+            <td> Main weather group: {{ historical_info['Main Weather1'] }} </td><td></td>
+            <td> Main weather group: {{ historical_info['Main Weather2'] }} </td><td></td>
+            <td> Main weather group: {{ historical_info['Main Weather3'] }} </td><td></td>
+            <td> Main weather group: {{ historical_info['Main Weather4'] }} </td><td></td>
+            <td> Main weather group: {{ historical_info['Main Weather5'] }} </td><td></td>
         </tr>
         <tr class="center aligned">
-            <td> Description: {{ weather_info['Description'] }} </td><td></td>
-            <td> Description: {{ historical_info['Description'] }} </td><td></td>
+            <td> Description: {{ historical_info['Description1'] }} </td><td></td>
+            <td> Description: {{ historical_info['Description2'] }} </td><td></td>
+            <td> Description: {{ historical_info['Description3'] }} </td><td></td>
+            <td> Description: {{ historical_info['Description4'] }} </td><td></td>
+            <td> Description: {{ historical_info['Description5'] }} </td><td></td>
         </tr>
     
         </tbody>
@@ -95,9 +134,41 @@
       </div>
       <div class="ui centered raised fluid card">
         <div class="content">
-          <div class="header">Historical JSON</div>
+          <div class="header">Historical JSON: {{ historical_info['Date1'] }}</div>
           <div class="description">
-            {{ hist_response }}
+            {{ hist_resp_1 }}
+          </div>
+        </div>
+      </div>
+      <div class="ui centered raised fluid card">
+        <div class="content">
+          <div class="header">Historical JSON: {{ historical_info['Date2'] }}</div>
+          <div class="description">
+            {{ hist_resp_2 }}
+          </div>
+        </div>
+      </div>
+      <div class="ui centered raised fluid card">
+        <div class="content">
+          <div class="header">Historical JSON: {{ historical_info['Date3'] }}</div>
+          <div class="description">
+            {{ hist_resp_3 }}
+          </div>
+        </div>
+      </div>
+      <div class="ui centered raised fluid card">
+        <div class="content">
+          <div class="header">Historical JSON: {{ historical_info['Date4'] }}</div>
+          <div class="description">
+            {{ hist_resp_4 }}
+          </div>
+        </div>
+      </div>
+      <div class="ui centered raised fluid card">
+        <div class="content">
+          <div class="header">Historical JSON: {{ historical_info['Date5'] }}</div>
+          <div class="description">
+            {{ hist_resp_5 }}
           </div>
         </div>
       </div>
