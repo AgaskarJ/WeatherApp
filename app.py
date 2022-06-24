@@ -102,6 +102,11 @@ def index():
         hist_icon_5 = hist_resp_5['current']['weather'][0]['icon']
         historical_info['Icon5'] = f'http://openweathermap.org/img/w/{hist_icon_5}.png'
 
+        # Calculate metrics
+        historical_info['Average'] = round((historical_info['Temperature1'] + historical_info['Temperature2'] + historical_info['Temperature3'] 
+                        + historical_info['Temperature4'] + historical_info['Temperature5'])/5,2)
+        historical_info['Delta'] = round(((weather_info['Temperature'] - historical_info['Temperature5'])/historical_info['Temperature5']) * 100,2)
+
         # Displays static map image using MapBox API
         map_api_key = 'pk.eyJ1IjoiYWdhc2thcmoiLCJhIjoiY2w0bHl2eHYzMDJvcjNubzIwNXZudjRzYSJ9.tfQhaNmHNWn9j9eJHedfAQ'
         map_url = f'https://api.mapbox.com/styles/v1/mapbox/outdoors-v11/static/{lon},{lat},13/1280x1000?access_token={map_api_key}'
